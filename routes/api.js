@@ -1,5 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
@@ -47,6 +45,16 @@ router.post('/protected', verifyToken, (req, res) => {
                 theBearerToken: authData
             });
         }
+    });
+});
+
+// Pilots
+router.get('/pilots', (req, res) => {
+    let sqlStatement = 'SELECT * FROM pilots';
+    db.query(sqlStatement, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send(result)
     });
 });
 
