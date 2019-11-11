@@ -1,0 +1,29 @@
+{
+  "name": "authentication-with-node-mysql-jwt",
+  "version": "1.0.0",
+  "description": "Creating a Node + Express API connected to MySQL with basic user authentication using JSON Web Tokens and maybe bcrypt.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markfaulk350/Authentication-with-Node-MySQL-JWT.git"
+  },
+  "author": "Mark Faulkner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markfaulk350/Authentication-with-Node-MySQL-JWT/issues"
+  },
+  "homepage": "https://github.com/markfaulk350/Authentication-with-Node-MySQL-JWT#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
