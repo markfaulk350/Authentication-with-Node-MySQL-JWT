@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const verifyToken = require('../verifyToken');
+const verifyToken = require('../middleware/verifyToken');
 const jwt = require('jsonwebtoken');
 
 // Health
