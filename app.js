@@ -22,6 +22,8 @@ app.use((req, res, next) => {
     next();
 });
 
+// Route Prefix
+app.use('/api/v1', router);
 
 // REGISTER OUR ROUTES
 router.use('/auth', require('./routes/auth'));
@@ -37,9 +39,6 @@ router.use((req, res, next) => {
         }
     })
 })
-
-// Route Prefix
-app.use('/api/v1', router);
 
 const port = process.env.port || 8080; // ( Comment for deployment )
 
