@@ -4,7 +4,10 @@ const express = require('express');
 const router = express.Router();
 // const sls = require('serverless-http'); // ( Uncomment for deployment )
 const app = express();
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
+
+app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
