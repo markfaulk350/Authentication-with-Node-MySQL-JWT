@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = process.env.port || 8080;
+const port = process.env.port || 8080; // ( Comment for deployment )
 
 // REGISTER OUR ROUTES
 router.use('/auth', require('./routes/auth'));
@@ -20,7 +20,7 @@ router.use('/health', require('./routes/health'));
 app.use('/api/v1', router);
 
 // START THE SERVER
-app.listen(port, () => console.log(`Server now listening for requests on http://localhost:${port}/api/v1/`));
+app.listen(port, () => console.log(`Server now listening for requests on http://localhost:${port}/api/v1/`)); // ( Comment for deployment )
 
 // Deploy to AWS Lambda
 // module.exports.server = sls(app) // ( Uncomment for deployment )
