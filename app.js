@@ -19,6 +19,16 @@ router.use('/auth', require('./routes/auth'));
 router.use('/users', require('./routes/users'));
 router.use('/health', require('./routes/health'));
 
+// Error handler
+router.use((req, res, next) => {
+    res.status(404).json({
+        error: {
+            message: "404 not found",
+            from: "Mark's API"
+        }
+    })
+})
+
 // Route Prefix
 app.use('/api/v1', router);
 
