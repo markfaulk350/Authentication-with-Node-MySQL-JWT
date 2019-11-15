@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // ( Comment for deployment )
 
 const express = require('express');
 const router = express.Router();
@@ -8,7 +8,6 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
 app.use(morgan('dev'));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -19,7 +18,7 @@ router.use('/auth', require('./routes/auth'));
 router.use('/users', require('./routes/users'));
 router.use('/health', require('./routes/health'));
 
-// Error handler
+// Error handler - when none of the endpoints match
 router.use((req, res, next) => {
     res.status(404).json({
         error: {
