@@ -11,7 +11,17 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = process.env.port || 8080; // ( Comment for deployment )
+// CORS middleware
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if(req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
+    }
+    next();
+});
+
 
 // REGISTER OUR ROUTES
 router.use('/auth', require('./routes/auth'));
@@ -30,6 +40,8 @@ router.use((req, res, next) => {
 
 // Route Prefix
 app.use('/api/v1', router);
+
+const port = process.env.port || 8080; // ( Comment for deployment )
 
 // START THE SERVER
 app.listen(port, () => console.log(`Server now listening for requests on http://localhost:${port}/api/v1/`)); // ( Comment for deployment )
