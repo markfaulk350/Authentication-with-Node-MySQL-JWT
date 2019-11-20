@@ -27,7 +27,6 @@ router.post('/signup', async (req, res, next) => {
                         custom_message: "failed inserting new user into db"
                     });
                 } else {
-                    console.log(u, result);
                     res.status(201).json({
                         userID: result.insertId,
                         custom_message: "new user was successfully created"
