@@ -4,11 +4,6 @@ const db = require('../db');
 const verifyToken = require('../middleware/verifyToken');
 const jwt = require('jsonwebtoken');
 
-// Health
-router.get('/', (req, res) => {
-    res.json({ message: "API is alive & healthy !!!" })
-});
-
 // Register
 router.post('/register', (req, res) => {
     res.json({endpoint: 'register'});
