@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const verifyToken = require('../middleware/verifyToken');
+const checkAuth = require('../middleware/check-auth');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -41,10 +42,45 @@ router.post('/signup', async (req, res, next) => {
             });
         } else {
             res.status(409).json({
-                error: `Cannot create user. Email: ${req.body.email} is already taken`
+                error: `Cannot create user`
             })
         }
     });
+});
+
+router.post('/login', async (req, res, next) => {
+    let findStatement = `SELECT * FROM users WHERE email=?;`;
+    db.query(findStatement, req.body.email, (err, result) => {
+        if (err || result.length === 0) {
+            return res.status(401).json({
+                error: `Auth failed`
+            });
+        } else {
+            bcrypt.compare(req.body.password, result[0].password, (err, success) => {
+                if (err) {
+                    return res.status(401).json({
+                        error: `Auth failed`
+                    });
+                }
+                if (success) {
+                    token = jwt.sign({id: result[0].id, email: result[0].email}, process.env.JWT_SECRET);
+                    return res.status(200).json({
+                        error: `Auth Successful`,
+                        token
+                    });
+                }
+                res.status(401).json({
+                    error: `Auth failed`
+                });
+            });
+        }
+    });
+});
+
+router.delete('/:id', checkAuth, async (req, res, next) => {
+    res.status(200).json({
+        message: "Success"
+    })
 });
 
 router.get('/:id', async (req, res, next) => {
@@ -52,6 +88,6 @@ router.get('/:id', async (req, res, next) => {
     res.status(200).json({
         user: userID
     })
-})
+});
 
 module.exports = router;
