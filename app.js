@@ -40,10 +40,12 @@ router.use((req, res, next) => {
     })
 })
 
-const port = process.env.port || 8080; // ( Comment for deployment )
+const port = process.env.port || 8000; // ( Comment for deployment )
 
 // START THE SERVER
 app.listen(port, () => console.log(`Server now listening for requests on http://localhost:${port}/api/v1/`)); // ( Comment for deployment )
 
 // Deploy to AWS Lambda
 // module.exports.server = sls(app) // ( Uncomment for deployment )
+
+// killall -9 node if port is already in use
